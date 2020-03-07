@@ -10,6 +10,11 @@
     Notification.requestPermission().then(function(result) {
       console.log(result);
     });
+
+    if (Notification.permission === 'granted') {
+      console.log('permission granted');
+      new Notification('Lorem ipsum');
+    }
   </script>
 </body>
 </html>
