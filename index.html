@@ -7,7 +7,9 @@
 </head>
 <body>
   <script>
-    new Notification("Hi there!");
+    Notification.requestPermission().then(function(result) {
+      console.log(result);
+    });
   </script>
 </body>
 </html>
