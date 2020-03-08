@@ -12,47 +12,32 @@
         this.time = time
         this.message = message;
         this.options = options;
-      }
-
-      get permission() {
-        console.log('get permission');
-        return this.permission;
-      }
-
-      set permission(permission) {
-        console.log('set permission');
-        return permission();
+        this.permission = Notification.permission;
       }
 
       verifyNotificationPermission() {
         console.log('verify notification permission');
-        if (Notification.permission === 'granted') {
-          return Notification.permission;
-        } else if (Notification.permission !== 'denied') {
+        if (this.permission !== 'granted' && this.permission !== 'denied') {
+          console.log('verify permission ASK');
           Notification.requestPermission().then(function(permission) {
-            console.log('2');
-            return permission;
+            console.log('verify permission ASK: OK');
+            this.permission = permission;
           });
+        } else {
+          console.log('verify permission OK - DEFAULT');
         }
       }
 
-      init() {
-        console.log('init');
-        this.permission(this.verifyNotificationPermission);
-      }
-
       displayNotification() {
-
         console.log('display notification');
-        if (this.permissionState) {
+        if (this.permission === 'granted') {
           new Notification(this.message);
         }
       }
 
       start() {
         console.log('start');
-        this.init()
-        // this.verifyNotificationPermission();
+        this.verifyNotificationPermission();
         this.displayNotification();
       }
     }
