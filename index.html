@@ -15,6 +15,10 @@
         this.permission = Notification.permission;
       }
 
+      set time(time) {
+        this.time = time * 1000; 
+      }
+
       verifyNotificationPermission() {
         console.log('verify notification permission');
         if (this.permission !== 'granted' && this.permission !== 'denied') {
@@ -23,8 +27,6 @@
             console.log('verify permission ASK: OK');
             this.permission = permission;
           });
-        } else {
-          console.log('verify permission OK - DEFAULT');
         }
       }
 
@@ -35,14 +37,23 @@
         }
       }
 
+      init() {
+        console.log('init');
+        this.verifyNotificationPermission();
+      }
+
       start() {
         console.log('start');
-        this.verifyNotificationPermission();
-        this.displayNotification();
+        console.log('time', this.time)
+        this.timerId = setTimeout(() => {
+          console.log('coutdown end', this)
+          // this.displayNotification();
+        }, this.time);
+        
       }
     }
 
-    new Timer(10, 'Lorem2').start();
+    new Timer(10, 'Lorem2').init();
   </script>
 </body>
 </html>
