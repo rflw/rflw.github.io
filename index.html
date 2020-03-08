@@ -9,10 +9,10 @@
   <script>
     class Timer {
       constructor(time = 10, message = '', options = {}) {
-        this.time(time);
-        this.message(message);
-        this.options(options);
-        this.permissionState(this.verifyNotificationPermission());
+        this.time = this.time(time);
+        // this.message(message);
+        // this.options(options);
+        // this.permissionState(this.verifyNotificationPermission());
       }
 
       get time() {
