@@ -7,13 +7,21 @@
 </head>
 <body>
   <script>
-    Notification.requestPermission().then(function(result) {
-      console.log(result);
-    });
+    const notificationMessage = function(permission) {
+      if (permission === 'granted') {
+        console.log('permission granted');
+        new Notification('Lorem ipsum');
+      }
+    };
 
     if (Notification.permission === 'granted') {
-      console.log('permission granted');
-      new Notification('Lorem ipsum');
+      console.log('1');
+      notificationMessage(Notification.permission);
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then(function(permission) {
+        console.log('2');
+        notificationMessage(permission);
+      });
     }
   </script>
 </body>
