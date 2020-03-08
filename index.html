@@ -9,43 +9,19 @@
   <script>
     class Timer {
       constructor(time = 10, message = '', options = {}) {
-        this.time = this.time(time);
-        // this.message(message);
-        // this.options(options);
-        // this.permissionState(this.verifyNotificationPermission());
+        this.time = time
+        this.message = message;
+        this.options = options;
       }
 
-      get time() {
-        return this.time;
-      }
-
-      set time(time) {
-        return this.time = time;
-      }
-
-      get options() {
-        return this.options;
-      }
-
-      set options(options) {
-        return this.options = options;
-      }
-
-      get message() {
-        return this.message;
-      }
-
-      set message(message) {
-        console.log('set message');
-        return message.length ? 'message ok' : 'message no';
-      }
-
-      get permissionState() {
+      get permission() {
+        console.log('get permission');
         return this.permission;
       }
 
-      set permissionState(permission) {
-        return this.permission = permission;
+      set permission(permission) {
+        console.log('set permission');
+        return permission();
       }
 
       verifyNotificationPermission() {
@@ -60,9 +36,15 @@
         }
       }
 
+      init() {
+        console.log('init');
+        permission(this.verifyNotificationPermission);
+      }
+
       displayNotification() {
+
         console.log('display notification');
-        if (this.permission === 'granted') {
+        if (this.permissionState) {
           new Notification(this.message);
         }
       }
