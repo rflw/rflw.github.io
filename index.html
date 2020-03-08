@@ -15,8 +15,8 @@
         this.permission = Notification.permission;
       }
 
-      set time(time) {
-        this.time = time * 1000; 
+      get time() {
+        return this.time * 1000;
       }
 
       verifyNotificationPermission() {
