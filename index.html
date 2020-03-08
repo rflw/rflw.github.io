@@ -7,22 +7,42 @@
 </head>
 <body>
   <script>
-    const notificationMessage = function(permission) {
-      if (permission === 'granted') {
-        console.log('permission granted');
-        new Notification('Lorem ipsum');
+    class Timer {
+      constructor(time = 10, message = '', options = {}) {
+        this.time = time;
+        this.message = message;
+        this.options = options;
+        this.permission = 'default';
       }
-    };
 
-    if (Notification.permission === 'granted') {
-      console.log('1');
-      notificationMessage(Notification.permission);
-    } else if (Notification.permission !== 'denied') {
-      Notification.requestPermission().then(function(permission) {
-        console.log('2');
-        notificationMessage(permission);
-      });
+      verifyNotificationPermission() {
+        console.log('verify notification permission');
+        if (Notification.permission === 'granted') {
+          console.log('1');
+          notificationMessage(Notification.permission);
+        } else if (Notification.permission !== 'denied') {
+          Notification.requestPermission().then(function(permission) {
+            console.log('2');
+            this.permission === permission;
+          });
+        }
+      }
+
+      displayNotification() {
+        console.log('display notification');
+        if (this.permission === 'granted') {
+          new Notification(this.message);
+        }
+      }
+
+      start() {
+        console.log('start');
+        this.verifyNotificationPermission();
+        this.displayNotification();
+      }
     }
+
+    new Timer(10, 'Lorem2').start();
   </script>
 </body>
 </html>
