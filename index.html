@@ -18,12 +18,11 @@
       verifyNotificationPermission() {
         console.log('verify notification permission');
         if (Notification.permission === 'granted') {
-          console.log('1');
-          notificationMessage(Notification.permission);
+          this.permission = Notification.permission;
         } else if (Notification.permission !== 'denied') {
           Notification.requestPermission().then(function(permission) {
             console.log('2');
-            this.permission === permission;
+            this.permission = permission;
           });
         }
       }
