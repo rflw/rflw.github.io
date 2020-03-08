@@ -9,18 +9,10 @@
   <script>
     class Timer {
       constructor(time = 10, message = '', options = {}) {
-        this.time = time;
+        this.time = time * 1000;
         this.message = message;
         this.options = options;
         this.permission = Notification.permission;
-      }
-
-      get time() {
-        return this.time * 1000;
-      }
-
-      set time(time) {
-        this.time = time;
       }
 
       verifyNotificationPermission() {
